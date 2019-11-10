@@ -9,4 +9,5 @@
     <string name="title">Title</string>
     <string name="days">Days</string>
     <string name="add">Add</string>
+    <string name="delete">Delete</string>
 </resources>

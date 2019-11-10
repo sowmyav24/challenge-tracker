@@ -32,7 +32,7 @@ class ChallengeRepository(application: Application) {
     }
 
     fun deleteChallenge(challenge: Challenge) {
-        challengeDAO.deleteChallenge(challenge)
+        DeleteAsyncTask(challengeDAO).execute(challenge)
     }
 
     private class InsertAsyncTask(val challengeDAO: ChallengeDAO) :
@@ -54,6 +54,13 @@ class ChallengeRepository(application: Application) {
         AsyncTask<Challenge, Unit, Unit>() {
         override fun doInBackground(vararg p0: Challenge?) {
             challengeDAO.updateChallenge(p0[0]!!)
+        }
+    }
+
+    private class DeleteAsyncTask(val challengeDAO: ChallengeDAO) :
+        AsyncTask<Challenge, Unit, Unit>() {
+        override fun doInBackground(vararg p0: Challenge?) {
+            challengeDAO.deleteChallenge(p0[0]!!)
         }
     }
 }

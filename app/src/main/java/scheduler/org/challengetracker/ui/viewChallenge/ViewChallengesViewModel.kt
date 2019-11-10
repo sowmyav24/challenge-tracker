@@ -10,4 +10,7 @@ class ViewChallengesViewModel(application: Application) : AndroidViewModel(appli
     private var repository: ChallengeRepository =
         ChallengeRepository(application)
     var challenges: LiveData<List<Challenge>?>? = repository.getAllChallenges()
-}
+
+    fun deleteChallenge(challenge: Challenge) {
+        repository.deleteChallenge(challenge)
+    }}

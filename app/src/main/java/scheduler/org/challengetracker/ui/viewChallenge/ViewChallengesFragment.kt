@@ -10,10 +10,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_view_challenge.view.challenge_list
 import scheduler.org.challengetracker.R
+import scheduler.org.challengetracker.database.Challenge
 
-class ViewChallengesFragment : Fragment() {
+class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
 
     private lateinit var viewChallengesViewModel: ViewChallengesViewModel
+
+    override fun deleteChallenge(challenge: Challenge) {
+        viewChallengesViewModel.deleteChallenge(challenge)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,9 +31,14 @@ class ViewChallengesFragment : Fragment() {
         val recyclerView = root.challenge_list
         viewChallengesViewModel.challenges?.observe(this, Observer {
             recyclerView.adapter =
-                ViewChallengeAdapter(activity, viewChallengesViewModel.challenges?.value ?: listOf())
+                ViewChallengeAdapter(activity, viewChallengesViewModel.challenges?.value as MutableList<Challenge>?
+                    ?: mutableListOf(), this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
         return root
     }
+}
+
+interface ViewChallengeNotifier {
+    fun deleteChallenge(challenge: Challenge)
 }

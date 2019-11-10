@@ -7,8 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.database.Challenge
 
-class ViewChallengeAdapter(private val context: Context?, val challenges: List<Challenge>) :
-    RecyclerView.Adapter<ViewChallengeViewHolder>() {
+class ViewChallengeAdapter(
+    private val context: Context?,
+    private val challenges: MutableList<Challenge>,
+    private val viewChallengeNotifier: ViewChallengeNotifier
+) :
+    RecyclerView.Adapter<ViewChallengeViewHolder>(), ViewChallengeListener {
+
+    override fun deleteChallenge(adapterPosition: Int) {
+        val challengeToBeRemoved = challenges.removeAt(adapterPosition)
+        viewChallengeNotifier.deleteChallenge(challengeToBeRemoved)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewChallengeViewHolder {
         return ViewChallengeViewHolder(
@@ -16,7 +26,7 @@ class ViewChallengeAdapter(private val context: Context?, val challenges: List<C
                 R.layout.view_challenge,
                 parent,
                 false
-            )
+            ), this
         )
     }
 
@@ -27,4 +37,8 @@ class ViewChallengeAdapter(private val context: Context?, val challenges: List<C
     override fun getItemCount(): Int {
         return challenges.size
     }
+}
+
+interface ViewChallengeListener {
+    fun deleteChallenge(adapterPosition: Int)
 }

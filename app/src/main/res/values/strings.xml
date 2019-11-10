@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Challenge Tracker</string>
+    <string name="nav_header_title">Challenge Tracker</string>
+    <string name="nav_header_subtitle">Completing my challenges</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_add_challenge">Add Challenge</string>
+    <string name="menu_view_challenges">View Challenges</string>
+    <string name="title">Title</string>
+    <string name="days">Days</string>
+    <string name="add">Add</string>
+</resources>

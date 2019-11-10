@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="scheduler.org.challengetracker.ui.challenge.ChallengeFragment"
+        tools:layout="@layout/fragment_challenge" />
+
+    <fragment
+        android:id="@+id/nav_add_challenge"
+        android:name="scheduler.org.challengetracker.ui.addChallenge.AddChallengeFragment"
+        android:label="@string/menu_add_challenge"
+        tools:layout="@layout/fragment_add_challenge" />
+
+    <fragment
+        android:id="@+id/nav_view_challenges"
+        android:name="scheduler.org.challengetracker.ui.viewChallenge.ViewChallengesFragment"
+        android:label="@string/menu_view_challenges"
+        tools:layout="@layout/fragment_view_challenge" />
+</navigation>

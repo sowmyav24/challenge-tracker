@@ -27,28 +27,27 @@ class EditChallengeFragment : Fragment() {
         challengeViewModel =
             ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_edit_challenge, container, false)
-        val challengeId = arguments?.getLong("id")
+        val challenge = arguments?.getParcelable("challenge") as Challenge
+        root.title.setText(challenge.title)
+        root.completed.setText(challenge.completedDays.toString())
+        root.total.setText(challenge.totalDays.toString())
         root.update.setOnClickListener {
-            val challenge = buildChallengeToBeUpdated(challengeId, root)
-            challenge?.let {
-                challengeViewModel.updateChallenge(it)
-            }
+            val challengeToBeUpdated = buildChallengeToBeUpdated(challenge.id, root)
+            challengeViewModel.updateChallenge(challengeToBeUpdated)
             replaceFragment(ViewChallengesFragment())
         }
         return root
     }
 
-    private fun buildChallengeToBeUpdated(challengeId: Long?, root: View) : Challenge? {
-        return challengeId?.let {
-            val challengeToBeUpdated = Challenge(
-                root.title.text.toString(),
-                root.completed.text.toString().toInt(),
-                root.total.text.toString().toInt(),
-                true
-            )
-            challengeToBeUpdated.id = it
-            challengeToBeUpdated
-        }
+    private fun buildChallengeToBeUpdated(challengeId: Long, root: View): Challenge {
+        val challengeToBeUpdated = Challenge(
+            root.title.text.toString(),
+            root.completed.text.toString().toInt(),
+            root.total.text.toString().toInt(),
+            true
+        )
+        challengeToBeUpdated.id = challengeId
+        return challengeToBeUpdated
     }
 
     private fun replaceFragment(fragment: Fragment) {

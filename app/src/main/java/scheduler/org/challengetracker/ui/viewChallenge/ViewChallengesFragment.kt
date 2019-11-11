@@ -22,8 +22,8 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         challengesViewModel.deleteChallenge(challenge)
     }
 
-    override fun editChallenge(id: Long) {
-        replaceFragment(EditChallengeFragment(), id)
+    override fun editChallenge(challenge: Challenge) {
+        replaceFragment(EditChallengeFragment(), challenge)
     }
 
     override fun onCreateView(
@@ -46,10 +46,10 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         return root
     }
 
-    private fun replaceFragment(fragment: Fragment, id: Long) {
+    private fun replaceFragment(fragment: Fragment, challenge: Challenge) {
         fragmentManager?.let {
             val bundle = Bundle()
-            bundle.putLong("id", id)
+            bundle.putParcelable("challenge", challenge)
             fragment.arguments = bundle
             it.beginTransaction()
                 .replace(R.id.nav_host_fragment, fragment)
@@ -62,5 +62,5 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
 interface ViewChallengeNotifier {
     fun deleteChallenge(challenge: Challenge)
 
-    fun editChallenge(id: Long)
+    fun editChallenge(challenge: Challenge)
 }

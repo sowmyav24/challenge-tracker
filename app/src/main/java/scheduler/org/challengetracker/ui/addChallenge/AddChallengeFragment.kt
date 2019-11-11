@@ -36,17 +36,20 @@ class AddChallengeFragment : Fragment() {
                     true
                 )
             )
-            fragmentManager?.let {
-                val bundle = Bundle()
-                bundle.putString("Title", root.title.text.toString())
-                val transaction = it.beginTransaction()
-                val challengeAddedFragment = ChallengeAddedFragment()
-                challengeAddedFragment.arguments = bundle
-                transaction.replace(R.id.nav_host_fragment, challengeAddedFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
-            }
+            replaceFragment(ChallengeAddedFragment(), root)
         }
         return root
+    }
+
+    private fun replaceFragment(fragment: Fragment, root: View) {
+        fragmentManager?.let {
+            val bundle = Bundle()
+            bundle.putString("Title", root.title.text.toString())
+            val transaction = it.beginTransaction()
+            fragment.arguments = bundle
+            transaction.replace(R.id.nav_host_fragment, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 }

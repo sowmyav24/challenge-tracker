@@ -22,7 +22,7 @@ class ViewChallengeAdapter(
 
     override fun editChallenge(adapterPosition: Int) {
         val challengeToBeRemoved = challenges[adapterPosition]
-        viewChallengeNotifier.editChallenge(challengeToBeRemoved.id)
+        viewChallengeNotifier.editChallenge(challengeToBeRemoved)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewChallengeViewHolder {

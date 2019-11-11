@@ -12,25 +12,26 @@ import kotlinx.android.synthetic.main.fragment_edit_challenge.view.total
 import kotlinx.android.synthetic.main.fragment_edit_challenge.view.update
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 import scheduler.org.challengetracker.ui.viewChallenge.ViewChallengesFragment
 
 class EditChallengeFragment : Fragment() {
 
-    private lateinit var editChallengeViewModel: EditChallengeViewModel
+    private lateinit var challengeViewModel: ChallengeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        editChallengeViewModel =
-            ViewModelProviders.of(this).get(EditChallengeViewModel::class.java)
+        challengeViewModel =
+            ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_edit_challenge, container, false)
         val challengeId = arguments?.getLong("id")
         root.update.setOnClickListener {
             val challenge = buildChallengeToBeUpdated(challengeId, root)
             challenge?.let {
-                editChallengeViewModel.updateChallenge(it)
+                challengeViewModel.updateChallenge(it)
             }
             replaceFragment(ViewChallengesFragment())
         }

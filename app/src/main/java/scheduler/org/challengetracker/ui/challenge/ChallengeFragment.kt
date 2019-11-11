@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_challenge.view.count
 import scheduler.org.challengetracker.R
 import androidx.appcompat.app.AppCompatActivity
 import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 
 
 class ChallengeFragment : Fragment() {

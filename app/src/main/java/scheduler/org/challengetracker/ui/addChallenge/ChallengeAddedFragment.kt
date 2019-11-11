@@ -11,18 +11,19 @@ import kotlinx.android.synthetic.main.fragment_challenge_added.view.add_challeng
 import kotlinx.android.synthetic.main.fragment_challenge_added.view.home
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.ui.challenge.ChallengeFragment
+import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 
 class ChallengeAddedFragment : Fragment() {
 
-    private lateinit var addChallengeViewModel: AddChallengeViewModel
+    private lateinit var challengeViewModel: ChallengeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        addChallengeViewModel =
-            ViewModelProviders.of(this).get(AddChallengeViewModel::class.java)
+        challengeViewModel =
+            ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_challenge_added, container, false)
         root.challenge_title.text =
             arguments?.getString("Title")?.plus(" " + getString(R.string.added))

@@ -1,4 +1,4 @@
-package scheduler.org.challengetracker.ui.challenge
+package scheduler.org.challengetracker.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -19,5 +19,17 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun updateChallenge(challenge: Challenge?) {
         challenge?.let { repository.updateChallenge(challenge) }
+    }
+
+    fun createChallenge(challenge: Challenge) {
+        repository.insertChallenge(challenge)
+    }
+
+    fun unSelectAllChallenges() {
+        repository.unSelectAllChallenges()
+    }
+
+    fun deleteChallenge(challenge: Challenge) {
+        repository.deleteChallenge(challenge)
     }
 }

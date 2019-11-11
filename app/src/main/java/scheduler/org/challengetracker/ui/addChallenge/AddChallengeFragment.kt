@@ -11,23 +11,24 @@ import kotlinx.android.synthetic.main.fragment_add_challenge.view.days
 import kotlinx.android.synthetic.main.fragment_add_challenge.view.title
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 
 
 class AddChallengeFragment : Fragment() {
 
-    private lateinit var addChallengeViewModel: AddChallengeViewModel
+    private lateinit var challengeViewModel: ChallengeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        addChallengeViewModel =
-            ViewModelProviders.of(this).get(AddChallengeViewModel::class.java)
+        challengeViewModel =
+            ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_add_challenge, container, false)
         root.add_challenge.setOnClickListener {
-            addChallengeViewModel.unSelectAllChallenges()
-            addChallengeViewModel.createChallenge(
+            challengeViewModel.unSelectAllChallenges()
+            challengeViewModel.createChallenge(
                 Challenge(
                     root.title.text.toString(),
                     0,

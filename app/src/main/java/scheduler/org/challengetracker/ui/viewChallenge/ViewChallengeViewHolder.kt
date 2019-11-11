@@ -3,6 +3,7 @@ package scheduler.org.challengetracker.ui.viewChallenge
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_challenge.view.delete_icon
+import kotlinx.android.synthetic.main.view_challenge.view.edit_icon
 import kotlinx.android.synthetic.main.view_challenge.view.progress
 import kotlinx.android.synthetic.main.view_challenge.view.title
 import scheduler.org.challengetracker.database.Challenge
@@ -13,7 +14,9 @@ class ViewChallengeViewHolder(view: View, listener: ViewChallengeListener) : Rec
     private val delete = view.delete_icon.setOnClickListener {
         listener.deleteChallenge(adapterPosition)
     }
-
+    private val edit  = view.edit_icon.setOnClickListener {
+        listener.editChallenge(adapterPosition)
+    }
     fun setData(challenge: Challenge) {
         title.text = challenge.id.toString()
         title.text = challenge.title

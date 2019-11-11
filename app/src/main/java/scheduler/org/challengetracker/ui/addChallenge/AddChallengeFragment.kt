@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_add_challenge.view.title
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.database.Challenge
 
+
 class AddChallengeFragment : Fragment() {
 
     private lateinit var addChallengeViewModel: AddChallengeViewModel
@@ -34,6 +35,16 @@ class AddChallengeFragment : Fragment() {
                     true
                 )
             )
+            fragmentManager?.let {
+                val bundle = Bundle()
+                bundle.putString("Title", root.title.text.toString())
+                val transaction = it.beginTransaction()
+                val challengeAddedFragment = ChallengeAddedFragment()
+                challengeAddedFragment.arguments = bundle
+                transaction.replace(R.id.nav_host_fragment, challengeAddedFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
         }
         return root
     }

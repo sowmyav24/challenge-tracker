@@ -40,21 +40,41 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/challenge_days"
+            android:id="@+id/completed_days"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="@dimen/dimen_120"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_28"
+            android:layout_marginTop="@dimen/dimen_28"
+            android:layout_marginEnd="@dimen/dimen_28"
+            android:hint="@string/completed"
+            android:textAlignment="center"
+            android:textSize="@dimen/dimen_text_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/challenge_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/completed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/total_days"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/dimen_120"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_28"
             android:layout_marginEnd="@dimen/dimen_28"
-            android:hint="@string/days"
+            android:hint="@string/total"
             android:textAlignment="center"
             android:textSize="@dimen/dimen_text_20"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/challenge_title">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/days"
+                android:id="@+id/total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -62,19 +82,19 @@
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button"
-            android:id="@+id/add_challenge"
+            android:id="@+id/update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_28"
             android:layout_marginEnd="@dimen/dimen_28"
             android:layout_marginBottom="@dimen/dimen_28"
             android:background="@color/colorPrimary"
-            android:text="@string/add"
+            android:text="@string/update"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/challenge_days" />
+            app:layout_constraintTop_toBottomOf="@+id/completed_days" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

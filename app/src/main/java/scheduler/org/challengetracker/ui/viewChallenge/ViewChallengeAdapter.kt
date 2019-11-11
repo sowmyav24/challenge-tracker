@@ -20,6 +20,11 @@ class ViewChallengeAdapter(
         notifyDataSetChanged()
     }
 
+    override fun editChallenge(adapterPosition: Int) {
+        val challengeToBeRemoved = challenges[adapterPosition]
+        viewChallengeNotifier.editChallenge(challengeToBeRemoved.id)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewChallengeViewHolder {
         return ViewChallengeViewHolder(
             LayoutInflater.from(context).inflate(
@@ -41,4 +46,6 @@ class ViewChallengeAdapter(
 
 interface ViewChallengeListener {
     fun deleteChallenge(adapterPosition: Int)
+
+    fun editChallenge(adapterPosition: Int)
 }

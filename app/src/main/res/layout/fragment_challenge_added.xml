@@ -2,7 +2,6 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.MaterialComponents.CardView"
-    android:id="@+id/add_challenge_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -13,68 +12,53 @@
     card_view:cardCornerRadius="@dimen/dimen_16"
     card_view:cardElevation="@dimen/dimen_16">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
             android:id="@+id/challenge_title"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_28"
             android:layout_marginTop="@dimen/dimen_28"
             android:layout_marginEnd="@dimen/dimen_28"
-            android:hint="@string/title"
+            android:text="@string/challenge_added"
             android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/challenge_days"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/dimen_120"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_28"
-            android:layout_marginEnd="@dimen/dimen_28"
-            android:hint="@string/days"
-            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="@dimen/dimen_text_20"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/challenge_title">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/days"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button"
             android:id="@+id/add_challenge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_48"
             android:layout_marginTop="@dimen/dimen_28"
             android:layout_marginEnd="@dimen/dimen_28"
             android:layout_marginBottom="@dimen/dimen_28"
             android:background="@color/colorPrimary"
-            android:text="@string/add"
+            android:text="@string/add_another"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/challenge_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_28"
+            android:layout_marginEnd="@dimen/dimen_48"
+            android:layout_marginBottom="@dimen/dimen_28"
+            android:text="@string/home"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/challenge_days" />
+            app:layout_constraintTop_toBottomOf="@+id/challenge_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

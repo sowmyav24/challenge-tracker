@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_add_challenge.view.*
 import kotlinx.android.synthetic.main.fragment_view_challenge.view.challenge_list
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.ui.addChallenge.EditChallengeFragment
 
 class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
 
@@ -18,6 +20,10 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
 
     override fun deleteChallenge(challenge: Challenge) {
         viewChallengesViewModel.deleteChallenge(challenge)
+    }
+
+    override fun editChallenge(id: Long) {
+        replaceFragment(EditChallengeFragment(), id)
     }
 
     override fun onCreateView(
@@ -31,14 +37,30 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         val recyclerView = root.challenge_list
         viewChallengesViewModel.challenges?.observe(this, Observer {
             recyclerView.adapter =
-                ViewChallengeAdapter(activity, viewChallengesViewModel.challenges?.value as MutableList<Challenge>?
-                    ?: mutableListOf(), this)
+                ViewChallengeAdapter(
+                    activity, viewChallengesViewModel.challenges?.value as MutableList<Challenge>?
+                        ?: mutableListOf(), this
+                )
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
         return root
+    }
+
+    private fun replaceFragment(fragment: Fragment, id: Long) {
+        fragmentManager?.let {
+            val bundle = Bundle()
+            bundle.putLong("id", id)
+            fragment.arguments = bundle
+            it.beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }
 
 interface ViewChallengeNotifier {
     fun deleteChallenge(challenge: Challenge)
+
+    fun editChallenge(id: Long)
 }

@@ -22,7 +22,6 @@ abstract class ChallengeDatabase : RoomDatabase() {
                         context.applicationContext,
                         ChallengeDatabase::class.java, "challenges_database"
                     ).fallbackToDestructiveMigration()
-                        .addCallback(roomCallback)
                         .build()
                 }
             }
@@ -59,5 +58,4 @@ abstract class ChallengeDatabase : RoomDatabase() {
             )
         }
     }
-
 }

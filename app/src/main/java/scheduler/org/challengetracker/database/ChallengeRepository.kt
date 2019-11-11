@@ -15,7 +15,7 @@ class ChallengeRepository(application: Application) {
         challengeDAO = database.challengeDAO()
     }
 
-    fun getAllChallenges(): LiveData<List<Challenge>?> {
+    fun getAllChallenges(): LiveData<List<Challenge>> {
         return challengeDAO.getAllChallenges()
     }
 

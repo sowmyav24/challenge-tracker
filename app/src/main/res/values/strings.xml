@@ -17,4 +17,7 @@
     <string name="add_another">Add Another</string>
     <string name="home">Home</string>
     <string name="delete">Delete</string>
+    <string name="start_challenging">Start challenging</string>
+    <string name="start_now">Start now</string>
+    <string name="required">Required</string>
 </resources>

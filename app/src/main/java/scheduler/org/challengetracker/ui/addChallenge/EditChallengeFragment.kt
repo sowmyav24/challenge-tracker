@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_edit_challenge.view.completed
 import kotlinx.android.synthetic.main.fragment_edit_challenge.view.title
 import kotlinx.android.synthetic.main.fragment_edit_challenge.view.total
@@ -32,9 +33,11 @@ class EditChallengeFragment : Fragment() {
         root.completed.setText(challenge.completedDays.toString())
         root.total.setText(challenge.totalDays.toString())
         root.update.setOnClickListener {
-            val challengeToBeUpdated = buildChallengeToBeUpdated(challenge.id, root)
-            challengeViewModel.updateChallenge(challengeToBeUpdated)
-            replaceFragment(ViewChallengesFragment())
+            val isValid = validateFields(listOf(root.title, root.completed, root.total))
+            if (isValid) {
+                challengeViewModel.updateChallenge(buildChallengeToBeUpdated(challenge.id, root))
+                replaceFragment(ViewChallengesFragment())
+            }
         }
         return root
     }
@@ -57,5 +60,16 @@ class EditChallengeFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    private fun validateFields(fields: List<TextInputEditText>): Boolean {
+        var isValid = true
+        fields.forEach {
+            if(it.text.isNullOrEmpty()) {
+                isValid = false
+                it.error = getString(R.string.required)
+            }
+        }
+        return isValid
     }
 }

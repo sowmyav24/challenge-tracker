@@ -17,7 +17,6 @@ import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
 
     private lateinit var challengesViewModel: ChallengeViewModel
-
     override fun deleteChallenge(challenge: Challenge) {
         challengesViewModel.deleteChallenge(challenge)
     }

@@ -12,7 +12,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 interface ChallengeDAO {
 
     @Query("SELECT * FROM Challenge")
-    fun getAllChallenges(): LiveData<List<Challenge>?>
+    fun getAllChallenges(): LiveData<List<Challenge>>
 
     @Insert(onConflict = REPLACE)
     fun insertChallenge(challenge: Challenge): Long
@@ -25,5 +25,4 @@ interface ChallengeDAO {
 
     @Delete
     fun deleteChallenge(challenge: Challenge)
-
 }

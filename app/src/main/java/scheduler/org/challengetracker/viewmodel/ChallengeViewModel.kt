@@ -11,10 +11,10 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
     private var repository: ChallengeRepository =
         ChallengeRepository(application)
 
-    var challenges: LiveData<List<Challenge>?>? = repository.getAllChallenges()
+    var challenges: LiveData<List<Challenge>> = repository.getAllChallenges()
 
-    val text = MutableLiveData<Int>().apply {
-        value = challenges?.value?.find { it.isSelected }?.completedDays ?: 0
+    val text = MutableLiveData<String>().apply {
+        value = challenges.value?.find { it.isSelected }?.completedDays.toString()
     }
 
     fun updateChallenge(challenge: Challenge?) {

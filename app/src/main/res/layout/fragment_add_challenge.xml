@@ -44,12 +44,12 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/dimen_120"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_28"
             android:layout_marginTop="@dimen/dimen_28"
             android:layout_marginEnd="@dimen/dimen_28"
             android:hint="@string/days"
             android:textAlignment="center"
             android:textSize="@dimen/dimen_text_20"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/challenge_title">
 
@@ -59,6 +59,26 @@
                 android:layout_height="wrap_content"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/notes_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_52"
+            android:text="@string/notes"
+            android:textSize="@dimen/dimen_text_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/challenge_days"
+            app:layout_constraintTop_toBottomOf="@id/challenge_title"/>
+
+       <androidx.appcompat.widget.AppCompatCheckBox
+           android:id="@+id/notes_needed"
+           android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_28"
+            android:layout_marginTop="@dimen/dimen_48"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/challenge_title"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button"

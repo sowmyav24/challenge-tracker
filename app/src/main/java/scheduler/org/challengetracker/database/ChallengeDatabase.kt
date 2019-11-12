@@ -5,12 +5,16 @@ import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Challenge::class], version = 1)
+@Database(entities = [Challenge::class, ChallengeDetails::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class ChallengeDatabase : RoomDatabase() {
 
     abstract fun challengeDAO(): ChallengeDAO
+
+    abstract fun challengeDetailsDAO(): ChallengeDetailsDAO
 
     companion object {
         private var instance: ChallengeDatabase? = null
@@ -30,32 +34,6 @@ abstract class ChallengeDatabase : RoomDatabase() {
 
         fun destroyInstance() {
             instance = null
-        }
-
-        private val roomCallback = object : RoomDatabase.Callback() {
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                PopulateDbAsyncTask(
-                    instance
-                )
-                    .execute()
-            }
-        }
-
-    }
-
-    class PopulateDbAsyncTask(db: ChallengeDatabase?) : AsyncTask<Unit, Unit, Unit>() {
-        private val challengeDAO = db?.challengeDAO()
-
-        override fun doInBackground(vararg p0: Unit?) {
-            challengeDAO?.insertChallenge(
-                Challenge(
-                    "Challenge",
-                    0,
-                    30,
-                    true
-                )
-            )
         }
     }
 }

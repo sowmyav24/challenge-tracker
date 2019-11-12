@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_add_challenge.view.add_challenge
-import kotlinx.android.synthetic.main.fragment_add_challenge.view.days
-import kotlinx.android.synthetic.main.fragment_add_challenge.view.title
+import kotlinx.android.synthetic.main.fragment_add_challenge.view.*
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.database.Challenge
 import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
@@ -42,12 +40,13 @@ class AddChallengeFragment : Fragment() {
         root: View
     ) {
         challengeViewModel.unSelectAllChallenges()
-        challengeViewModel.createChallenge(
+        challengeViewModel.insertChallenge(
             Challenge(
                 title.text.toString(),
                 0,
                 totalDays.text.toString().toInt(),
-                true
+                true,
+                root.notes_needed.isChecked
             )
         )
         replaceFragment(ChallengeAddedFragment(), root)

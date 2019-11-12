@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import scheduler.org.challengetracker.database.Challenge
 import scheduler.org.challengetracker.ui.addChallenge.AddChallengeFragment
 import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import scheduler.org.challengetracker.database.ChallengeDetails
 
 
 class ChallengeFragment : Fragment() {
@@ -54,10 +57,31 @@ class ChallengeFragment : Fragment() {
 
     private fun onCounterIncrement(textView: TextView) = textView.setOnClickListener {
         challenge?.let {
+            var challengeDetails: ChallengeDetails? = null
+            if (it.hasNotes) {
+                challengeDetails = captureNotes(it.id)
+            }
+            challengeDetails?.let {
+                challengeViewModel.insertChallengeDetails(challengeDetails)
+            }
             it.completedDays = challenge?.completedDays?.plus(1) ?: 0
             challengeViewModel.updateChallenge(challenge)
             challengeViewModel.text.value = challenge?.completedDays.toString()
         } ?: replaceFragment(AddChallengeFragment())
+    }
+
+    private fun captureNotes(challengeId: Long): ChallengeDetails {
+        val challengeDetails = ChallengeDetails()
+        val alert = AlertDialog.Builder(context!!)
+        alert.setMessage(R.string.notes_heading)
+        val input = EditText(context!!)
+        alert.setView(input)
+        alert.setPositiveButton(R.string.ok) { _, _ ->
+            challengeDetails.notes = input.text.toString()
+        }
+        challengeDetails.challengeId = challengeId
+        alert.show()
+        return challengeDetails
     }
 
     private fun replaceFragment(fragment: Fragment) {

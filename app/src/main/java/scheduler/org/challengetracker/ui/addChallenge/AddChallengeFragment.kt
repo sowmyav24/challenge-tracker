@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_add_challenge.view.*
+import kotlinx.android.synthetic.main.fragment_add_challenge.view.add_challenge
+import kotlinx.android.synthetic.main.fragment_add_challenge.view.days
+import kotlinx.android.synthetic.main.fragment_add_challenge.view.notes_needed
+import kotlinx.android.synthetic.main.fragment_add_challenge.view.title
 import scheduler.org.challengetracker.R
-import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.entity.Challenge
 import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 
 

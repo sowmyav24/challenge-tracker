@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_edit_challenge.view.title
 import kotlinx.android.synthetic.main.fragment_edit_challenge.view.total
 import kotlinx.android.synthetic.main.fragment_edit_challenge.view.update
 import scheduler.org.challengetracker.R
-import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.entity.Challenge
 import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 import scheduler.org.challengetracker.ui.viewChallenge.ViewChallengesFragment
 

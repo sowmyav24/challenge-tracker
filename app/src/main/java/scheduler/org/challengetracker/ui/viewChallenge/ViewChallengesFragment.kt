@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_view_challenge.view.challenge_list
 import scheduler.org.challengetracker.R
-import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.entity.Challenge
 import scheduler.org.challengetracker.ui.addChallenge.EditChallengeFragment
+import scheduler.org.challengetracker.ui.challengeDetails.ChallengeDetailsFragment
 import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 
 class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
@@ -22,7 +23,15 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
     }
 
     override fun editChallenge(challenge: Challenge) {
-        replaceFragment(EditChallengeFragment(), challenge)
+        val bundle = Bundle()
+        bundle.putParcelable("challenge", challenge)
+        replaceFragment(EditChallengeFragment(), bundle)
+    }
+
+    override fun onItemSelected(challenge: Challenge) {
+        val bundle = Bundle()
+        bundle.putParcelable("challenge", challenge)
+        replaceFragment(ChallengeDetailsFragment(), bundle)
     }
 
     override fun onCreateView(
@@ -34,7 +43,7 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
             ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_view_challenge, container, false)
         val recyclerView = root.challenge_list
-        challengesViewModel.challenges?.observe(this, Observer {
+        challengesViewModel.challenges.observe(this, Observer {
             recyclerView.adapter =
                 ViewChallengeAdapter(
                     activity, challengesViewModel.challenges?.value as MutableList<Challenge>?
@@ -45,10 +54,8 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         return root
     }
 
-    private fun replaceFragment(fragment: Fragment, challenge: Challenge) {
+    private fun replaceFragment(fragment: Fragment, bundle: Bundle) {
         fragmentManager?.let {
-            val bundle = Bundle()
-            bundle.putParcelable("challenge", challenge)
             fragment.arguments = bundle
             it.beginTransaction()
                 .replace(R.id.nav_host_fragment, fragment)
@@ -62,4 +69,6 @@ interface ViewChallengeNotifier {
     fun deleteChallenge(challenge: Challenge)
 
     fun editChallenge(challenge: Challenge)
+
+    fun onItemSelected(challenge: Challenge)
 }

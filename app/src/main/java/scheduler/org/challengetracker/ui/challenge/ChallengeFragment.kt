@@ -11,12 +11,12 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_challenge.view.count
 import scheduler.org.challengetracker.R
 import androidx.appcompat.app.AppCompatActivity
-import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.entity.Challenge
 import scheduler.org.challengetracker.ui.addChallenge.AddChallengeFragment
 import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import scheduler.org.challengetracker.database.ChallengeDetails
+import scheduler.org.challengetracker.entity.ChallengeDetails
 
 
 class ChallengeFragment : Fragment() {
@@ -57,12 +57,8 @@ class ChallengeFragment : Fragment() {
 
     private fun onCounterIncrement(textView: TextView) = textView.setOnClickListener {
         challenge?.let {
-            var challengeDetails: ChallengeDetails? = null
             if (it.hasNotes) {
-                challengeDetails = captureNotes(it.id)
-            }
-            challengeDetails?.let {
-                challengeViewModel.insertChallengeDetails(challengeDetails)
+                captureNotes(it.id)
             }
             it.completedDays = challenge?.completedDays?.plus(1) ?: 0
             challengeViewModel.updateChallenge(challenge)
@@ -78,6 +74,7 @@ class ChallengeFragment : Fragment() {
         alert.setView(input)
         alert.setPositiveButton(R.string.ok) { _, _ ->
             challengeDetails.notes = input.text.toString()
+            challengeViewModel.insertChallengeDetails(challengeDetails)
         }
         challengeDetails.challengeId = challengeId
         alert.show()

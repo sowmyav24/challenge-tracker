@@ -2,15 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.MaterialComponents.CardView"
+    android:id="@+id/challenge_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dimen_8"
     android:layout_marginBottom="@dimen/dimen_8"
-    app:strokeColor="@color/colorPrimary"
-    app:strokeWidth="1dp"
     app:cardCornerRadius="@dimen/dimen_8"
     app:cardElevation="@dimen/dimen_4"
-    >
+    app:strokeColor="@color/colorPrimary"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -61,8 +61,8 @@
             android:id="@+id/delete_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dimen_16"
             android:layout_marginStart="@dimen/dimen_16"
+            android:layout_marginEnd="@dimen/dimen_16"
             android:contentDescription="@string/delete"
             android:src="@drawable/ic_delete_forever"
             app:layout_constraintBottom_toBottomOf="parent"

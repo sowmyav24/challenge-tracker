@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import scheduler.org.challengetracker.R
-import scheduler.org.challengetracker.database.Challenge
+import scheduler.org.challengetracker.entity.Challenge
 
 class ViewChallengeAdapter(
     private val context: Context?,
@@ -21,8 +21,11 @@ class ViewChallengeAdapter(
     }
 
     override fun editChallenge(adapterPosition: Int) {
-        val challengeToBeRemoved = challenges[adapterPosition]
-        viewChallengeNotifier.editChallenge(challengeToBeRemoved)
+        viewChallengeNotifier.editChallenge(challenges[adapterPosition])
+    }
+
+    override fun onItemSelected(adapterPosition: Int) {
+        viewChallengeNotifier.onItemSelected(challenges[adapterPosition])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewChallengeViewHolder {
@@ -48,4 +51,6 @@ interface ViewChallengeListener {
     fun deleteChallenge(adapterPosition: Int)
 
     fun editChallenge(adapterPosition: Int)
+    
+    fun onItemSelected(adapterPosition: Int)
 }

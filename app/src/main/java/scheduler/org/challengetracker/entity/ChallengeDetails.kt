@@ -1,4 +1,4 @@
-package scheduler.org.challengetracker.database
+package scheduler.org.challengetracker.entity
 
 import android.os.Parcelable
 import androidx.room.Entity

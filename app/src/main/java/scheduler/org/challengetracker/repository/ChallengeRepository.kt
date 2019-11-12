@@ -1,8 +1,11 @@
-package scheduler.org.challengetracker.database
+package scheduler.org.challengetracker.repository
 
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import scheduler.org.challengetracker.dao.ChallengeDAO
+import scheduler.org.challengetracker.database.ChallengeDatabase
+import scheduler.org.challengetracker.entity.Challenge
 
 class ChallengeRepository(application: Application) {
     private var challengeDAO: ChallengeDAO
@@ -28,7 +31,9 @@ class ChallengeRepository(application: Application) {
     }
 
     fun unSelectAllChallenges() {
-        UpdateAllAsyncTask(challengeDAO).execute()
+        UpdateAllAsyncTask(
+            challengeDAO
+        ).execute()
     }
 
     fun deleteChallenge(challenge: Challenge) {

@@ -17,6 +17,7 @@ import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import scheduler.org.challengetracker.entity.ChallengeDetails
+import scheduler.org.challengetracker.entity.isCompleted
 
 
 class ChallengeFragment : Fragment() {
@@ -41,7 +42,7 @@ class ChallengeFragment : Fragment() {
                 challengeViewModel.text.value = getString(R.string.start_now)
             } else {
                 challenge = it?.last()
-                if(challenge?.completedDays == challenge?.totalDays) {
+                if(challenge?.isCompleted() == true) {
                     completeChallenge(textView)
                 } else {
                     challengeViewModel.text.value = challenge?.completedDays.toString()

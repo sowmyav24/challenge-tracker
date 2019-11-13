@@ -18,4 +18,9 @@ data class Challenge(
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
+
+}
+
+fun Challenge.isCompleted() : Boolean {
+    return this.completedDays == this.totalDays
 }

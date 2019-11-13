@@ -41,7 +41,7 @@ class ChallengeFragment : Fragment() {
                 title = getString(R.string.start_challenging)
                 challengeViewModel.text.value = getString(R.string.start_now)
             } else {
-                challenge = it?.last()
+                challenge = it?.find { selected -> selected.isSelected }
                 if(challenge?.isCompleted() == true) {
                     completeChallenge(textView)
                 } else {

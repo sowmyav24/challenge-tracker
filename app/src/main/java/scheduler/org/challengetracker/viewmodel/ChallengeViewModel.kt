@@ -17,6 +17,21 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
 
     var challenges: LiveData<List<Challenge>> = challengeRepository.getAllChallenges()
 
+    fun getOrderedChallenges(
+        challengesFromDB: List<Challenge>?
+    ): MutableList<Challenge> {
+        val challenges = mutableListOf<Challenge>()
+        val selectedChallenge = challengesFromDB?.find { it.isSelected }
+        selectedChallenge?.let {
+            challenges.add(0, selectedChallenge)
+        }
+        val otherChallenges = challengesFromDB?.filter { !it.isSelected }
+        otherChallenges?.let {
+            challenges.addAll(otherChallenges)
+        }
+        return challenges
+    }
+
     fun challengeDetails(challengeId: Long): LiveData<List<ChallengeDetails>> =
         challengeDetailsRepository.getChallengeDetails(challengeId)
 

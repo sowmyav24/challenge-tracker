@@ -22,10 +22,16 @@ class ViewChallengeAdapter(
 
     override fun editChallenge(adapterPosition: Int) {
         viewChallengeNotifier.editChallenge(challenges[adapterPosition])
+        notifyDataSetChanged()
     }
 
     override fun onItemSelected(adapterPosition: Int) {
         viewChallengeNotifier.onItemSelected(challenges[adapterPosition])
+    }
+
+    override fun setAsPrimary(adapterPosition: Int) {
+        viewChallengeNotifier.setAsPrimary(challenges[adapterPosition])
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewChallengeViewHolder {
@@ -39,7 +45,9 @@ class ViewChallengeAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewChallengeViewHolder, position: Int) {
-        holder.setData(challenges[position])
+        val isSelectedIcon =
+            if (position == 0) R.drawable.ic_home_black_selected else R.drawable.ic_home_black
+        holder.setData(challenges[position], isSelectedIcon)
     }
 
     override fun getItemCount(): Int {
@@ -51,6 +59,8 @@ interface ViewChallengeListener {
     fun deleteChallenge(adapterPosition: Int)
 
     fun editChallenge(adapterPosition: Int)
-    
+
     fun onItemSelected(adapterPosition: Int)
+
+    fun setAsPrimary(adapterPosition: Int)
 }

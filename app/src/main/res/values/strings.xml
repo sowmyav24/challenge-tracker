@@ -23,5 +23,6 @@
     <string name="start_now">Start now</string>
     <string name="congratulations">Congratulations !</string>
     <string name="no_notes">No Notes Captured for this challenge</string>
+    <string name="no_challenges">No challenges</string>
     <string name="required">Required</string>
 </resources>

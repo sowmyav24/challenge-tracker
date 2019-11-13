@@ -12,7 +12,7 @@ data class Challenge(
     val title: String = "",
     var completedDays: Int = 0,
     val totalDays: Int = 0,
-    val isSelected: Boolean = true,
+    var isSelected: Boolean = true,
     val hasNotes: Boolean = false,
     val createdDate: Date = Date()
 ) : Parcelable {

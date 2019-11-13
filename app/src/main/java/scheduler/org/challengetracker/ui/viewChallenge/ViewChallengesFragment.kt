@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_view_challenge.view.challenge_list
+import kotlinx.android.synthetic.main.fragment_view_challenge.view.no_challenges
 import scheduler.org.challengetracker.R
 import scheduler.org.challengetracker.entity.Challenge
 import scheduler.org.challengetracker.ui.addChallenge.EditChallengeFragment
@@ -34,6 +36,12 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         replaceFragment(ChallengeDetailsFragment(), bundle)
     }
 
+    override fun setAsPrimary(challenge: Challenge) {
+        challengesViewModel.unSelectAllChallenges()
+        challenge.isSelected = true
+        challengesViewModel.updateChallenge(challenge)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,10 +52,14 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         val root = inflater.inflate(R.layout.fragment_view_challenge, container, false)
         val recyclerView = root.challenge_list
         challengesViewModel.challenges.observe(this, Observer {
+            val orderedChallenges = challengesViewModel.getOrderedChallenges(it)
+            toggleVisibility(root.no_challenges, root.challenge_list, orderedChallenges.isEmpty())
             recyclerView.adapter =
                 ViewChallengeAdapter(
-                    activity, challengesViewModel.challenges?.value as MutableList<Challenge>?
-                        ?: mutableListOf(), this
+                    activity,
+                    orderedChallenges as MutableList<Challenge>?
+                        ?: mutableListOf(),
+                    this
                 )
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -63,6 +75,14 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
                 .commit()
         }
     }
+    private fun toggleVisibility(
+        noNotes: View,
+        recyclerView: RecyclerView,
+        isEmpty: Boolean
+    ) {
+        noNotes.visibility = if(isEmpty) View.VISIBLE else View.GONE
+        recyclerView.visibility = if(isEmpty) View.GONE else View.VISIBLE
+    }
 }
 
 interface ViewChallengeNotifier {
@@ -71,4 +91,6 @@ interface ViewChallengeNotifier {
     fun editChallenge(challenge: Challenge)
 
     fun onItemSelected(challenge: Challenge)
+
+    fun setAsPrimary(challenge: Challenge)
 }

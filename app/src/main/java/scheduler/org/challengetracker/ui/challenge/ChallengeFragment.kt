@@ -41,13 +41,22 @@ class ChallengeFragment : Fragment() {
                 challengeViewModel.text.value = getString(R.string.start_now)
             } else {
                 challenge = it?.last()
+                if(challenge?.completedDays == challenge?.totalDays) {
+                    completeChallenge(textView)
+                } else {
+                    challengeViewModel.text.value = challenge?.completedDays.toString()
+                }
                 title = challenge?.title ?: ""
-                challengeViewModel.text.value = challenge?.completedDays.toString()
             }
             (activity as AppCompatActivity).supportActionBar?.title = title
-
         })
         return root
+    }
+
+    private fun completeChallenge(textView: TextView) {
+        challengeViewModel.text.value = getString(R.string.congratulations)
+        textView.background = resources.getDrawable(R.drawable.ic_circle_gradient)
+        textView.isEnabled = false
     }
 
     private fun setCounterValue(textView: TextView) =

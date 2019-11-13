@@ -14,7 +14,7 @@
     <string name="add">Add</string>
     <string name="update">Update</string>
     <string name="notes">Enable Notes</string>
-    <string name="notes_heading">Notes for your thoughts ?</string>
+    <string name="notes_heading">Notes for your thoughts :</string>
     <string name="added">Added</string>
     <string name="add_another">Add Another</string>
     <string name="home">Home</string>
@@ -22,5 +22,7 @@
     <string name="delete">Delete</string>
     <string name="start_challenging">Start challenging</string>
     <string name="start_now">Start now</string>
+    <string name="congratulations">Congratulations !</string>
+    <string name="no_notes">No Notes Captured for this challenge</string>
     <string name="required">Required</string>
 </resources>

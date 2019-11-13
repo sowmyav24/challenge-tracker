@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_text_view"
         android:gravity="center"
+        android:elevation="@dimen/dimen_16"
+        android:shadowColor="@color/black"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/dimen_text_40"

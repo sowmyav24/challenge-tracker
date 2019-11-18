@@ -29,11 +29,6 @@ class ViewChallengeAdapter(
         viewChallengeNotifier.onItemSelected(challenges[adapterPosition])
     }
 
-    override fun setAsPrimary(adapterPosition: Int) {
-        viewChallengeNotifier.setAsPrimary(challenges[adapterPosition])
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewChallengeViewHolder {
         return ViewChallengeViewHolder(
             LayoutInflater.from(context).inflate(
@@ -61,6 +56,4 @@ interface ViewChallengeListener {
     fun editChallenge(adapterPosition: Int)
 
     fun onItemSelected(adapterPosition: Int)
-
-    fun setAsPrimary(adapterPosition: Int)
 }

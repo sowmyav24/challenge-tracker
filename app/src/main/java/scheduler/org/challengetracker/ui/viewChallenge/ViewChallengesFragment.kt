@@ -36,12 +36,6 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         replaceFragment(ChallengeDetailsFragment(), bundle)
     }
 
-    override fun setAsPrimary(challenge: Challenge) {
-        challengesViewModel.unSelectAllChallenges()
-        challenge.isSelected = true
-        challengesViewModel.updateChallenge(challenge)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -91,6 +85,4 @@ interface ViewChallengeNotifier {
     fun editChallenge(challenge: Challenge)
 
     fun onItemSelected(challenge: Challenge)
-
-    fun setAsPrimary(challenge: Challenge)
 }

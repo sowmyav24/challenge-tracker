@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_challenge.view.count
+import kotlinx.android.synthetic.main.fragment_challenge.view.filled_exposed_dropdown
 import scheduler.org.challengetracker.R
 import androidx.appcompat.app.AppCompatActivity
 import scheduler.org.challengetracker.entity.Challenge
@@ -35,6 +37,7 @@ class ChallengeFragment : Fragment() {
         val textView: TextView = root.count
         onCounterIncrement(textView)
         setCounterValue(textView)
+
         challengeViewModel.challenges.observe(this, Observer {
             val title: String
             if (it.isEmpty()) {
@@ -42,7 +45,8 @@ class ChallengeFragment : Fragment() {
                 challengeViewModel.text.value = getString(R.string.start_now)
             } else {
                 challenge = it?.find { selected -> selected.isSelected }
-                if(challenge?.isCompleted() == true) {
+                onChallengeSelected(root, it)
+                if (challenge?.isCompleted() == true) {
                     completeChallenge(textView)
                 } else {
                     challengeViewModel.text.value = challenge?.completedDays.toString()
@@ -52,6 +56,26 @@ class ChallengeFragment : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.title = title
         })
         return root
+    }
+
+    private fun onChallengeSelected(
+        root: View,
+        it: List<Challenge>
+    ) {
+        val adapter = ArrayAdapter(
+            context,
+            R.layout.dropdown_menu_popup_item,
+            it.map { c -> c.title }
+        )
+        val editTextFilledExposedDropdown = root.filled_exposed_dropdown
+        editTextFilledExposedDropdown.setAdapter(adapter)
+        editTextFilledExposedDropdown.setText(challenge?.title, false)
+        editTextFilledExposedDropdown.setOnItemClickListener { _, _, position, _ ->
+            challenge = it[position]
+            challengeViewModel.unSelectAllChallenges()
+            challenge?.isSelected = true
+            challengeViewModel.updateChallenge(challenge)
+        }
     }
 
     private fun completeChallenge(textView: TextView) {

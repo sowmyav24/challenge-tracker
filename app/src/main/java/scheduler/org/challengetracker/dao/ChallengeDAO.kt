@@ -12,7 +12,7 @@ import scheduler.org.challengetracker.entity.Challenge
 @Dao
 interface ChallengeDAO {
 
-    @Query("SELECT * FROM Challenge")
+    @Query("SELECT * FROM Challenge order by id")
     fun getAllChallenges(): LiveData<List<Challenge>>
 
     @Insert(onConflict = REPLACE)

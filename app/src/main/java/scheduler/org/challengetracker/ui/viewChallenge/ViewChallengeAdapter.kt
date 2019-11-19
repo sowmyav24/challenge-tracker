@@ -15,9 +15,7 @@ class ViewChallengeAdapter(
     RecyclerView.Adapter<ViewChallengeViewHolder>(), ViewChallengeListener {
 
     override fun deleteChallenge(adapterPosition: Int) {
-        val challengeToBeRemoved = challenges.removeAt(adapterPosition)
-        viewChallengeNotifier.deleteChallenge(challengeToBeRemoved)
-        notifyDataSetChanged()
+        viewChallengeNotifier.deleteChallenge(challenges[adapterPosition], adapterPosition)
     }
 
     override fun editChallenge(adapterPosition: Int) {
@@ -47,6 +45,16 @@ class ViewChallengeAdapter(
 
     override fun getItemCount(): Int {
         return challenges.size
+    }
+
+    fun deleteSuccess(adapterPosition: Int) {
+        val isSelectedChallenge = challenges[adapterPosition].isSelected
+        challenges.removeAt(adapterPosition)
+        if(isSelectedChallenge && challenges.size > 0) {
+            challenges[0].isSelected = true
+            viewChallengeNotifier.updateChallenge(challenges[0])
+        }
+        notifyDataSetChanged()
     }
 }
 

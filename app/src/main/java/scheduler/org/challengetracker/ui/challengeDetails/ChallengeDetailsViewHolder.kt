@@ -14,7 +14,7 @@ class ChallengeDetailsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun setData(challengeDetails: ChallengeDetails) {
         val formattedDate = SimpleDateFormat("MMM dd, yyyy").format(challengeDetails.date)
-        notes.text = challengeDetails.notes
+        notes.text = if (challengeDetails.notes.isNotEmpty()) challengeDetails.notes else "-"
         date.text = formattedDate
     }
 }

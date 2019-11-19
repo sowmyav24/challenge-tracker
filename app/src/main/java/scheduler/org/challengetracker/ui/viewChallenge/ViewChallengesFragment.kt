@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,14 +21,28 @@ import scheduler.org.challengetracker.viewmodel.ChallengeViewModel
 class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
 
     private lateinit var challengesViewModel: ChallengeViewModel
-    override fun deleteChallenge(challenge: Challenge) {
-        challengesViewModel.deleteChallenge(challenge)
+    private lateinit var adapter: ViewChallengeAdapter
+
+    override fun deleteChallenge(challenge: Challenge, position: Int) {
+        AlertDialog.Builder(context!!)
+            .setTitle(R.string.delete)
+            .setMessage(R.string.confirmation_message)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                challengesViewModel.deleteChallenge(challenge)
+                adapter.deleteSuccess(position)
+            }.setNegativeButton(R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }.show()
     }
 
     override fun editChallenge(challenge: Challenge) {
         val bundle = Bundle()
         bundle.putParcelable("challenge", challenge)
         replaceFragment(EditChallengeFragment(), bundle)
+    }
+
+    override fun updateChallenge(challenge: Challenge) {
+        challengesViewModel.updateChallenge(challenge)
     }
 
     override fun onItemSelected(challenge: Challenge) {
@@ -48,13 +63,13 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
         challengesViewModel.challenges.observe(this, Observer {
             val orderedChallenges = challengesViewModel.getOrderedChallenges(it)
             toggleVisibility(root.no_challenges, root.challenge_list, orderedChallenges.isEmpty())
-            recyclerView.adapter =
-                ViewChallengeAdapter(
-                    activity,
-                    orderedChallenges as MutableList<Challenge>?
-                        ?: mutableListOf(),
-                    this
-                )
+            adapter = ViewChallengeAdapter(
+                activity,
+                orderedChallenges as MutableList<Challenge>?
+                    ?: mutableListOf(),
+                this
+            )
+            recyclerView.adapter = adapter
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
         return root
@@ -69,20 +84,23 @@ class ViewChallengesFragment : Fragment(), ViewChallengeNotifier {
                 .commit()
         }
     }
+
     private fun toggleVisibility(
         noNotes: View,
         recyclerView: RecyclerView,
         isEmpty: Boolean
     ) {
-        noNotes.visibility = if(isEmpty) View.VISIBLE else View.GONE
-        recyclerView.visibility = if(isEmpty) View.GONE else View.VISIBLE
+        noNotes.visibility = if (isEmpty) View.VISIBLE else View.GONE
+        recyclerView.visibility = if (isEmpty) View.GONE else View.VISIBLE
     }
 }
 
 interface ViewChallengeNotifier {
-    fun deleteChallenge(challenge: Challenge)
+    fun deleteChallenge(challenge: Challenge, position: Int)
 
     fun editChallenge(challenge: Challenge)
+
+    fun updateChallenge(challenge: Challenge)
 
     fun onItemSelected(challenge: Challenge)
 }

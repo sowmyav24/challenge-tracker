@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_challenge.view.count
 import kotlinx.android.synthetic.main.fragment_challenge.view.filled_exposed_dropdown
+import kotlinx.android.synthetic.main.fragment_challenge.view.menu_items
 import scheduler.org.challengetracker.R
 import androidx.appcompat.app.AppCompatActivity
 import scheduler.org.challengetracker.entity.Challenge
@@ -26,6 +27,7 @@ class ChallengeFragment : Fragment() {
 
     private lateinit var challengeViewModel: ChallengeViewModel
     private var challenge: Challenge? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +43,7 @@ class ChallengeFragment : Fragment() {
         challengeViewModel.challenges.observe(this, Observer {
             val title: String
             if (it.isEmpty()) {
+                root.menu_items.visibility = View.GONE
                 title = getString(R.string.start_challenging)
                 challengeViewModel.text.value = getString(R.string.start_now)
             } else {

@@ -4,10 +4,10 @@
     <solid android:color="?attr/colorPrimary" />
     <gradient
         android:angle="135"
-        android:centerColor="#ff42959a"
-        android:endColor="#ff23729a"
-        android:startColor="#ff2d9a59" />
+        android:centerColor="@color/colorAccent"
+        android:endColor="@color/colorPrimaryDark"
+        android:startColor="@color/colorPrimary" />
     <size
-        android:width="280dp"
-        android:height="280dp" />
+        android:width="240dp"
+        android:height="240dp" />
 </shape>

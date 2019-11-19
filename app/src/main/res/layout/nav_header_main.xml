@@ -13,18 +13,12 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dimen_8"
-        app:srcCompat="@mipmap/ic_launcher_round"
-        android:contentDescription="@string/nav_header_subtitle"
-        android:id="@+id/imageView" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dimen_8"
+        android:textSize="@dimen/dimen_text_16"
+        android:layout_marginBottom="@dimen/dimen_text_16"
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

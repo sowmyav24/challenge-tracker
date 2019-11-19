@@ -44,16 +44,13 @@ class ChallengeFragment : Fragment() {
             val title: String
             if (it.isEmpty()) {
                 root.menu_items.visibility = View.GONE
+                textView.background = resources.getDrawable(R.drawable.ic_circle_gradient)
                 title = getString(R.string.start_challenging)
                 challengeViewModel.text.value = getString(R.string.start_now)
             } else {
                 challenge = it?.find { selected -> selected.isSelected }
                 onChallengeSelected(root, it)
-                if (challenge?.isCompleted() == true) {
-                    completeChallenge(textView)
-                } else {
-                    challengeViewModel.text.value = challenge?.completedDays.toString()
-                }
+                setChallengeParams(textView, challenge?.isCompleted() == true)
                 title = challenge?.title ?: ""
             }
             (activity as AppCompatActivity).supportActionBar?.title = title
@@ -81,10 +78,14 @@ class ChallengeFragment : Fragment() {
         }
     }
 
-    private fun completeChallenge(textView: TextView) {
-        challengeViewModel.text.value = getString(R.string.congratulations)
-        textView.background = resources.getDrawable(R.drawable.ic_circle_gradient)
-        textView.isEnabled = false
+    private fun setChallengeParams(textView: TextView, isDone: Boolean) {
+        challengeViewModel.text.value =
+            if (isDone) getString(R.string.done) else challenge?.completedDays.toString()
+        if (isDone)
+            textView.background = resources.getDrawable(R.drawable.ic_circle_gradient)
+        else
+            textView.setBackgroundResource(R.drawable.ic_count_background)
+        textView.isEnabled = !isDone
     }
 
     private fun setCounterValue(textView: TextView) =

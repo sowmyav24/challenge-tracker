@@ -27,7 +27,7 @@
         android:layout_marginEnd="@dimen/dimen_16"
         android:background="@drawable/rounded_small_text_view"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="@dimen/dimen_text_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

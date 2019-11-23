@@ -38,9 +38,7 @@ class ViewChallengeAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewChallengeViewHolder, position: Int) {
-        val isSelectedIcon =
-            if (position == 0) R.drawable.ic_home_black_selected else R.drawable.ic_home_black
-        holder.setData(challenges[position], isSelectedIcon)
+        holder.setData(challenges[position])
     }
 
     override fun getItemCount(): Int {

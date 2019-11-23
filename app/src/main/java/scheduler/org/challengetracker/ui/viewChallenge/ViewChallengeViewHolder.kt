@@ -22,7 +22,7 @@ class ViewChallengeViewHolder(view: View, listener: ViewChallengeListener) : Rec
     private val challengeItem  = view.challenge_item.setOnClickListener {
         listener.onItemSelected(adapterPosition)
     }
-    fun setData(challenge: Challenge, selectedIcon: Int) {
+    fun setData(challenge: Challenge) {
         title.text = challenge.id.toString()
         title.text = challenge.title
         val progressText = challenge.completedDays.toString() + " / " + challenge.totalDays.toString()

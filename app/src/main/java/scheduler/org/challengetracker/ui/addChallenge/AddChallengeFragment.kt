@@ -1,9 +1,11 @@
 package scheduler.org.challengetracker.ui.addChallenge
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.textfield.TextInputEditText
@@ -29,6 +31,9 @@ class AddChallengeFragment : Fragment() {
             ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_add_challenge, container, false)
         root.add_challenge.setOnClickListener {
+            val methodManager: InputMethodManager =
+                activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            methodManager.hideSoftInputFromWindow(activity!!.currentFocus.windowToken, 0)
             val isValid = validateField(listOf(root.title, root.days))
             if (isValid) {
                 addChallenge(root.title, root.days, root)

@@ -9,8 +9,9 @@ import scheduler.org.challengetracker.entity.ChallengeDetails
 
 class ChallengeDetailsAdapter(
     private val context: Context?,
-    private val challengeDetails: List<ChallengeDetails>
-) : RecyclerView.Adapter<ChallengeDetailsViewHolder>() {
+    private val challengeDetails: List<ChallengeDetails>,
+    private val challengeDetailsNotifier: ChallengeDetailsNotifier
+) : RecyclerView.Adapter<ChallengeDetailsViewHolder>(), EditChallengeListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeDetailsViewHolder {
         return ChallengeDetailsViewHolder(
@@ -18,7 +19,8 @@ class ChallengeDetailsAdapter(
                 R.layout.view_challenge_details,
                 parent,
                 false
-            )
+            ),
+            this
         )
     }
 
@@ -29,4 +31,12 @@ class ChallengeDetailsAdapter(
     override fun getItemCount(): Int {
         return challengeDetails.size
     }
+
+    override fun updateChallengeDetails(position: Int) {
+        challengeDetailsNotifier.updateChallengeDetails(challengeDetails[position])
+    }
+}
+
+interface EditChallengeListener {
+    fun updateChallengeDetails(position: Int)
 }

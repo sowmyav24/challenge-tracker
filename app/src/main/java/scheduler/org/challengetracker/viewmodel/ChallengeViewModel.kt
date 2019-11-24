@@ -51,6 +51,10 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
         challengeDetailsRepository.insertChallengeDetails(challengeDetails)
     }
 
+    fun updateChallengeDetails(challengeDetails: ChallengeDetails) {
+        challengeDetailsRepository.updateChallengeDetails(challengeDetails)
+    }
+
     fun unSelectAllChallenges() {
         challengeRepository.unSelectAllChallenges()
     }

@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Update
 import scheduler.org.challengetracker.entity.ChallengeDetails
 
 @Dao
@@ -16,4 +17,6 @@ interface ChallengeDetailsDAO {
     @Insert(onConflict = REPLACE)
     fun insertChallengeDetails(challengeDetails: ChallengeDetails): Long
 
+    @Update
+    fun updateChallengeDetails(challengeDetails: ChallengeDetails)
 }

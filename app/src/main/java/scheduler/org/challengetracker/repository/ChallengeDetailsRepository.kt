@@ -25,6 +25,10 @@ class ChallengeDetailsRepository(application: Application) {
     fun insertChallengeDetails(challengeDetails: ChallengeDetails) {
         InsertAsyncTask(challengeDetailsDAO).execute(challengeDetails)
     }
+
+    fun updateChallengeDetails(challengeDetails: ChallengeDetails) {
+        UpdateAsyncTask(challengeDetailsDAO).execute(challengeDetails)
+    }
 }
 
 private class InsertAsyncTask(val challengeDetailsDAO: ChallengeDetailsDAO) :
@@ -35,3 +39,10 @@ private class InsertAsyncTask(val challengeDetailsDAO: ChallengeDetailsDAO) :
     }
 }
 
+private class UpdateAsyncTask(val challengeDetailsDAO: ChallengeDetailsDAO) :
+    AsyncTask<ChallengeDetails, Unit, Unit>() {
+
+    override fun doInBackground(vararg challengeDetails: ChallengeDetails?) {
+        challengeDetailsDAO.updateChallengeDetails(challengeDetails[0]!!)
+    }
+}

@@ -1,9 +1,9 @@
 <resources>
-    <dimen name="nav_header_height">176dp</dimen>
     <dimen name="dimen_4">4dp</dimen>
     <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_12">12dp</dimen>
     <dimen name="dimen_16">16dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
     <dimen name="dimen_24">24dp</dimen>
     <dimen name="dimen_28">28dp</dimen>
     <dimen name="dimen_32">32dp</dimen>
@@ -12,8 +12,10 @@
     <dimen name="dimen_48">48dp</dimen>
     <dimen name="dimen_52">52dp</dimen>
     <dimen name="dimen_56">56dp</dimen>
-    <dimen name="dimen_120">120dp</dimen>
     <dimen name="dimen_72">72dp</dimen>
+    <dimen name="dimen_80">80dp</dimen>
+    <dimen name="dimen_120">120dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
     <dimen name="dimen_text_16">16sp</dimen>
     <dimen name="dimen_text_20">20sp</dimen>
     <dimen name="dimen_text_40">40sp</dimen>

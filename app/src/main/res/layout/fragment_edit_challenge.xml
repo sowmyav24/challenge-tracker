@@ -42,12 +42,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/completed_days"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/dimen_120"
+            android:layout_width="@dimen/dimen_80"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_28"
             android:layout_marginTop="@dimen/dimen_28"
             android:layout_marginEnd="@dimen/dimen_28"
-            android:hint="@string/completed"
+            android:hint="@string/done_text"
             android:textAlignment="center"
             android:textSize="@dimen/dimen_text_20"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,14 +63,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/total_days"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/dimen_120"
+            android:layout_width="@dimen/dimen_80"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_28"
-            android:layout_marginEnd="@dimen/dimen_28"
+            android:layout_marginStart="@dimen/dimen_28"
             android:hint="@string/total"
             android:textAlignment="center"
             android:textSize="@dimen/dimen_text_20"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/completed_days"
             app:layout_constraintTop_toBottomOf="@id/challenge_title">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -88,18 +88,16 @@
             android:layout_marginTop="@dimen/dimen_28"
             android:text="@string/notes"
             android:textSize="@dimen/dimen_text_16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/completed_days"/>
+            app:layout_constraintStart_toEndOf="@+id/total_days"
+            app:layout_constraintTop_toBottomOf="@id/challenge_title"/>
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/notes_needed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dimen_24"
-            android:layout_marginStart="@dimen/dimen_12"
-            android:layout_marginTop="@dimen/dimen_16"
-            app:layout_constraintStart_toEndOf="@+id/notes_text"
-            app:layout_constraintTop_toBottomOf="@id/completed_days"/>
+            android:layout_marginStart="@dimen/dimen_20"
+            app:layout_constraintStart_toEndOf="@id/total_days"
+            app:layout_constraintTop_toBottomOf="@id/notes_text"/>
 
         <com.google.android.material.button.MaterialButton
             style="@style/Widget.MaterialComponents.Button"
@@ -115,7 +113,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notes_text" />
+            app:layout_constraintTop_toBottomOf="@+id/completed_days" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

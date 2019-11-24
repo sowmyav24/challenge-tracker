@@ -37,9 +37,10 @@ class EditChallengeFragment : Fragment() {
         root.total.setText(challenge.totalDays.toString())
         root.notes_needed.isChecked = challenge.hasNotes
         root.update.setOnClickListener {
-            val methodManager: InputMethodManager =
-                activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            methodManager.hideSoftInputFromWindow(activity!!.currentFocus.windowToken, 0)
+            activity?.let {
+                val methodManager = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                methodManager.hideSoftInputFromWindow(it.currentFocus?.windowToken, 0)
+            }
             val isValid = validateFields(listOf(root.title, root.completed, root.total))
             if (isValid) {
                 challengeViewModel.updateChallenge(buildChallengeToBeUpdated(challenge.id, root))

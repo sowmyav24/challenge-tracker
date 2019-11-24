@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.view_challenge_details.view.notes
 import kotlinx.android.synthetic.main.view_challenge_details.view.notes_date
 import scheduler.org.challengetracker.entity.ChallengeDetails
 import java.text.SimpleDateFormat
+import java.util.*
 
 class ChallengeDetailsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -13,7 +14,7 @@ class ChallengeDetailsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val date = view.notes_date
 
     fun setData(challengeDetails: ChallengeDetails) {
-        val formattedDate = SimpleDateFormat("MMM dd, yyyy HH:mm").format(challengeDetails.date)
+        val formattedDate = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.ENGLISH).format(challengeDetails.date)
         notes.text = if (challengeDetails.notes.isNotEmpty()) challengeDetails.notes else "-"
         date.text = formattedDate
     }

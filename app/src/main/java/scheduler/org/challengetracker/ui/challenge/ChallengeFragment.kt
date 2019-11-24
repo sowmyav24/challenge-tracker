@@ -60,18 +60,18 @@ class ChallengeFragment : Fragment() {
 
     private fun onChallengeSelected(
         root: View,
-        it: List<Challenge>
+        challenges: List<Challenge>
     ) {
         val adapter = ArrayAdapter(
-            context,
+            context!!,
             R.layout.dropdown_menu_popup_item,
-            it.map { c -> c.title }
+            challenges.map { c -> c.title }
         )
         val editTextFilledExposedDropdown = root.filled_exposed_dropdown
         editTextFilledExposedDropdown.setAdapter(adapter)
         editTextFilledExposedDropdown.setText(challenge?.title, false)
         editTextFilledExposedDropdown.setOnItemClickListener { _, _, position, _ ->
-            challenge = it[position]
+            challenge = challenges[position]
             challengeViewModel.unSelectAllChallenges()
             challenge?.isSelected = true
             challengeViewModel.updateChallenge(challenge)

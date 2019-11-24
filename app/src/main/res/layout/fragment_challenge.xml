@@ -22,6 +22,7 @@
         <AutoCompleteTextView
             android:id="@+id/filled_exposed_dropdown"
             android:editable="false"
+            android:hint="@string/select"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -37,7 +38,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/dimen_text_40"
-        android:text="CT"
+        android:text="@string/ct"
         tools:background="@drawable/ic_circle_gradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

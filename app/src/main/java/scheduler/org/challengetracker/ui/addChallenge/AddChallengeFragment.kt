@@ -31,9 +31,10 @@ class AddChallengeFragment : Fragment() {
             ViewModelProviders.of(this).get(ChallengeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_add_challenge, container, false)
         root.add_challenge.setOnClickListener {
-            val methodManager: InputMethodManager =
-                activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            methodManager.hideSoftInputFromWindow(activity!!.currentFocus.windowToken, 0)
+            activity?.let {
+                val methodManager = it.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                methodManager.hideSoftInputFromWindow(it.currentFocus?.windowToken, 0)
+            }
             val isValid = validateField(listOf(root.title, root.days))
             if (isValid) {
                 addChallenge(root.title, root.days, root)

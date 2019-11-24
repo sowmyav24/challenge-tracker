@@ -8,7 +8,6 @@
     <string name="title">Title</string>
     <string name="challenge_added">Challenge Added !</string>
     <string name="days">Days</string>
-    <string name="completed">Completed</string>
     <string name="total">Total</string>
     <string name="add">Add</string>
     <string name="update">Update</string>
@@ -29,4 +28,5 @@
     <string name="required">Required</string>
     <string name="select">Select</string>
     <string name="confirmation_message">Are you sure you want to delete ?</string>
+    <string name="ct">CT</string>
 </resources>
